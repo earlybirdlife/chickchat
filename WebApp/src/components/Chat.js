@@ -31,27 +31,38 @@ export class Chat extends React.Component {
 
 function renderMessage (message) {
     return (
-        <li key={message.messageId}>
+        <li style ={{wordBreak: "break-all"}} key={message.messageId}>
 
             {/* Exercise 3: Add message author */}
-            <img src = {message.author.picture}  height = "50" />
+            <img style={imageStyle} src = {message.author.picture}  height = "50" />
+            <span style= {{fontFamily: "Arial", fontSize: "15",fontWeight: "bold", color: "#EF6F79"}}>
             {"[" + message.author.name + "] "}
+            </span>
             {getMessageBody(message)}
         </li>
     )
 }
 
+
+const fontStyle = {
+  fontFamily: "Courier",
+  fontColor: "Blue",
+  fontSize: "20px"
+}
+
 const ulStyle = {
     overflowY: "scroll",
-
+    listStyle: "none"
     /* Exercise 4: Add your own styles */
 
 }
 
 const imageStyle = {
-    maxWidth: "100px",
-    maxHeight: "100px",
+    maxWidth: "80px",
+    maxHeight: "80px",
+    borderRadius: "80px",
     objectFit: "contain"
+
 }
 
 const rootStyle = {
@@ -69,8 +80,13 @@ function getMessageBody (message) {
     if (message.data) {
         return <img src={message.data} style={imageStyle} />
     } else {
-        return message.text
-    }
+
+        return (
+          <span style={{color:"black", fontFamily: "Arial"}}>
+          {message.text}
+          </span>
+    )
+  }
 }
 
 Chat.propTypes = {
